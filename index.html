@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding Invitation of Ayishath Azmiya & Habeeb. Join us in celebrating their Nikah ceremony on Sunday, September 27th, 2026 at Janapriya Garden, Mani.">
+    <title>Ayishath Azmiya & Habeeb — Wedding Invitation</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+
+    <!-- Royal Wax Seal & Envelope Entrance Overlay -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="envelope-door envelope-left"></div>
+        <div class="envelope-door envelope-right"></div>
+        
+        <div class="wax-seal-wrapper" id="waxSeal">
+            <div class="seal-glow-pulse"></div>
+            <div class="wax-seal-btn">
+                <svg viewBox="0 0 100 100" class="wax-seal-svg">
+                    <circle cx="50" cy="50" r="46" fill="var(--burgundy-primary)" stroke="var(--gold-antique)" stroke-width="2.5"/>
+                    <circle cx="50" cy="50" r="39" fill="none" stroke="var(--gold-light)" stroke-width="1" stroke-dasharray="4 3"/>
+                    <text x="50" y="58" font-family="var(--font-heading)" font-size="26" fill="var(--gold-light)" text-anchor="middle" font-style="italic" letter-spacing="1">A&H</text>
+                </svg>
+            </div>
+            <span class="seal-tap-text">Tap to Open Royal Invitation</span>
+        </div>
+    </div>
+
+    <!-- Floating Audio Control (Islamic Nasheed) -->
+    <div class="audio-control-container" id="audioContainer">
+        <button class="audio-btn" id="audioToggle" aria-label="Toggle background Islamic Nasheed">
+            <span class="audio-icon playing-animation">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+            </span>
+            <span class="audio-text">Play Nasheed</span>
+        </button>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://ia801503.us.archive.org/15/items/IslamicBackgroundMusicNoCopyrights/Islamic%20Background%20Music%20No%20Copyrights.mp3" type="audio/mpeg">
+            <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a7395b.mp3?filename=islamic-background-music-11234.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo gold-shimmer-text">A & H</a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-item active">Home</a></li>
+                <li><a href="#story" class="nav-item">The Couple</a></li>
+                <li><a href="#events" class="nav-item">Nikah & Lunch</a></li>
+                <li><a href="#family" class="nav-item">Family</a></li>
+                <li><a href="#venue" class="nav-item">Venue</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section">
+        <!-- Corner Floral Ornaments -->
+        <div class="floral-corner top-left">
+            <svg viewBox="0 0 120 120" width="120" height="120" fill="none">
+                <path d="M0 0 C40 10, 80 40, 120 120 M0 0 L0 40 M0 0 L40 0" stroke="var(--gold-antique)" stroke-width="1.2" opacity="0.6"/>
+                <circle cx="25" cy="25" r="4" fill="var(--burgundy-primary)" opacity="0.8"/>
+                <circle cx="45" cy="15" r="2.5" fill="var(--gold-light)" opacity="0.7"/>
+                <circle cx="15" cy="45" r="2.5" fill="var(--gold-light)" opacity="0.7"/>
+            </svg>
+        </div>
+        <div class="floral-corner bottom-right">
+            <svg viewBox="0 0 120 120" width="120" height="120" fill="none">
+                <path d="M120 120 C80 110, 40 80, 0 0 M120 120 L120 80 M120 120 L80 120" stroke="var(--gold-antique)" stroke-width="1.2" opacity="0.6"/>
+                <circle cx="95" cy="95" r="4" fill="var(--burgundy-primary)" opacity="0.8"/>
+                <circle cx="75" cy="105" r="2.5" fill="var(--gold-light)" opacity="0.7"/>
+                <circle cx="105" cy="75" r="2.5" fill="var(--gold-light)" opacity="0.7"/>
+            </svg>
+        </div>
+
+        <!-- Floating Gold & Rose Particles Canvas -->
+        <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <!-- Center Warm Glow layer -->
+            <div class="golden-glow" id="heroGlow"></div>
+
+            <div class="bismillah-wrapper" id="heroBismillah">
+                <div class="bismillah-arabic pulse-glow-gold">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                <div class="bismillah-english">In the name of Allah, the Most Gracious, the Most Merciful</div>
+                <div class="blessings-tag">With the blessings of <em>Ar-Rahman</em></div>
+            </div>
+            
+            <!-- Elegant Arch Frame around Names -->
+            <div class="arch-frame-container" id="heroArchContainer">
+                <svg viewBox="0 0 100 150" class="arch-svg-draw" preserveAspectRatio="none">
+                    <path id="archDrawPath" d="M 0 150 L 0 50 C 0 15, 30 0, 50 0 C 70 0, 100 15, 100 50 L 100 150" fill="none" stroke="var(--gold-antique)" stroke-width="1.2"/>
+                </svg>
+
+                <div class="names-wrapper">
+                    <span class="bride-name name-animate gold-shimmer-text" id="heroBride">Ayishath Azmiya</span>
+                    <div class="parent-lineage">D/o Hyder • Kalara House, Kadaba</div>
+                    
+                    <span class="ampersand name-animate" id="heroAmp">&</span>
+                    
+                    <span class="groom-name name-animate gold-shimmer-text" id="heroGroom">Habeeb</span>
+                    <div class="parent-lineage">S/o Adam • Darkas House, Puttur</div>
+                </div>
+            </div>
+            
+            <div class="invitation-text" id="heroInviteText">
+                <p class="parent-names">Together with Mrs. & Mr. Hyder & Family,</p>
+                <p class="invite-msg">Joyfully invite you to celebrate the Nikah ceremony</p>
+                
+                <!-- Highlighted Date & Hijri -->
+                <div class="wedding-date-hero pulse-glow-gold">
+                    <span class="date-day">SUNDAY</span>
+                    <span class="date-divider">•</span>
+                    <span class="date-number">27</span>
+                    <span class="date-month">SEPTEMBER</span>
+                    <span class="date-divider">•</span>
+                    <span class="date-year">2026</span>
+                </div>
+                <div class="hijri-date-sub">( Chand 16, Rabi ul Akhir )</div>
+            </div>
+            
+            <a href="#verse" class="scroll-down-btn" id="heroScrollBtn">
+                <span>Scroll to discover</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Quran Verse Section -->
+    <section id="verse" class="verse-section scroll-trigger-section">
+        <div class="container">
+            <div class="verse-container" id="verseRevealContainer">
+                <div class="verse-arch-outline">
+                    <svg viewBox="0 0 100 100" class="verse-arch-svg" preserveAspectRatio="none">
+                        <path id="verseArchPath" d="M 0 100 L 0 40 C 0 15, 35 0, 50 0 C 65 0, 100 15, 100 40 L 100 100" fill="none" stroke="var(--gold-antique)" stroke-width="1"/>
+                    </svg>
+                </div>
+                
+                <div class="islamic-separator" id="verseSep1">
+                    <svg viewBox="0 0 100 20" width="80" height="15" fill="currentColor">
+                        <path d="M50 0 L55 5 L50 10 L45 5 Z M50 10 L55 15 L50 20 L45 15 Z M20 8 L30 8 M70 8 L80 8" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+                
+                <blockquote class="quran-verse-arabic pulse-glow-gold" id="verseArabic">
+                    " وَخَلَقْنَاكُمْ أَزْوَاجًا "
+                </blockquote>
+                
+                <blockquote class="quran-verse-english" id="verseEnglish">
+                    “And We created you in pairs.”
+                </blockquote>
+                
+                <cite class="quran-verse-source" id="verseSource">— Qur’an 78:8</cite>
+                
+                <div class="islamic-separator" id="verseSep2">
+                    <svg viewBox="0 0 100 20" width="80" height="15" fill="currentColor">
+                        <path d="M50 0 L55 5 L50 10 L45 5 Z M50 10 L55 15 L50 20 L45 15 Z M20 8 L30 8 M70 8 L80 8" stroke="currentColor" stroke-width="1" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Couple Section -->
+    <section id="story" class="story-section scroll-trigger-section">
+        <div class="container">
+            <div class="section-title-wrapper" id="storyTitle">
+                <span class="subtitle">In Sha Allah • A Sacred Union</span>
+                <h2 class="section-title">The Bride & Groom</h2>
+                <div class="title-divider"></div>
+            </div>
+
+            <div class="story-grid">
+                <!-- Bride Profile Card -->
+                <div class="profile-card bride-card scroll-reveal-card">
+                    <div class="profile-frame">
+                        <div class="arch-clip">
+                            <div class="profile-image-placeholder">
+                                <svg viewBox="0 0 100 150" class="arch-svg-outline" preserveAspectRatio="none">
+                                    <path d="M 0 150 L 0 50 A 50 50 0 0 1 100 50 L 100 150 Z" fill="none" stroke="var(--gold-antique)" stroke-width="1.5"/>
+                                </svg>
+                                <span class="placeholder-initial gold-shimmer-text">A</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <span class="role-badge">The Bride</span>
+                        <h3>Ayishath Azmiya</h3>
+                        <p class="lineage-detail">D/o Hyder</p>
+                        <p class="address-detail">Kalara House, Kadaba Post & Kadaba Taluk</p>
+                        <div class="grandparent-honor">
+                            Granddaughter of <em>marhoom</em> Adam & <em>marhoom</em> M. Moosan
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Groom Profile Card -->
+                <div class="profile-card groom-card scroll-reveal-card">
+                    <div class="profile-frame">
+                        <div class="arch-clip">
+                            <div class="profile-image-placeholder">
+                                <svg viewBox="0 0 100 150" class="arch-svg-outline" preserveAspectRatio="none">
+                                    <path d="M 0 150 L 0 50 A 50 50 0 0 1 100 50 L 100 150 Z" fill="none" stroke="var(--gold-antique)" stroke-width="1.5"/>
+                                </svg>
+                                <span class="placeholder-initial gold-shimmer-text">H</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <span class="role-badge">The Groom</span>
+                        <h3>Habeeb</h3>
+                        <p class="lineage-detail">S/o Adam</p>
+                        <p class="address-detail">Arigamajal Darkas House, Puttur Taluk</p>
+                        <div class="grandparent-honor">
+                            Building a home grounded in faith, love & barakah
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section (Nikah & Lunch) -->
+    <section id="events" class="events-section scroll-trigger-section">
+        <div class="container">
+            <div class="section-title-wrapper" id="eventsTitle">
+                <span class="subtitle">Save The Date • Sunday, Sept 27, 2026</span>
+                <h2 class="section-title">Nikah & Feast</h2>
+                <div class="title-divider"></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-line" id="timelineProgressLine"></div>
+                
+                <!-- Event 1: Nikah -->
+                <div class="timeline-item scroll-reveal-timeline">
+                    <div class="timeline-dot">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content event-card">
+                        <div class="event-header">
+                            <div class="event-icon">
+                                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="14" r="7" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                            </div>
+                            <h3 class="event-name">The Sacred Nikah</h3>
+                        </div>
+                        <div class="event-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Date & Day</span>
+                                <span class="detail-value">Sunday, 27th September 2026 <br><small style="color:var(--gold-dark);">(Chand 16, Rabi ul Akhir)</small></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nikah Time</span>
+                                <span class="detail-value highlight-time pulse-glow-gold">11:30 AM Sharp</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Venue</span>
+                                <span class="detail-value">Janapriya Garden, Mani</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Janapriya+Garden+Mani" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm event-map-btn">
+                            <span>View Venue Map</span>
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event 2: Lunch -->
+                <div class="timeline-item scroll-reveal-timeline">
+                    <div class="timeline-dot">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content event-card">
+                        <div class="event-header">
+                            <div class="event-icon">
+                                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2v3M9 5h6v4l-3 4-3-4V5zM5 9h14M8 13v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-6M12 13v6" />
+                                </svg>
+                            </div>
+                            <h3 class="event-name">Celebratory Lunch</h3>
+                        </div>
+                        <div class="event-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Timing</span>
+                                <span class="detail-value highlight-time pulse-glow-gold">Immediately Following Nikah</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Venue</span>
+                                <span class="detail-value">Janapriya Garden Dining Hall, Mani</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Invitation From</span>
+                                <span class="detail-value">Mrs & Mr Hyder, Family & Friends</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Janapriya+Garden+Mani" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm event-map-btn">
+                            <span>Get Directions</span>
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section scroll-trigger-section">
+        <div class="countdown-overlay"></div>
+        <div class="container">
+            <h2 class="countdown-title">Counting Down to 27th September 2026</h2>
+            
+            <div class="countdown-grid-wrapper">
+                <div class="countdown-glow-glow"></div>
+                <div class="countdown-grid" id="countdown" data-date="2026-09-27T11:30:00">
+                    <div class="countdown-card">
+                        <span class="countdown-num pulse-glow-gold" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-card">
+                        <span class="countdown-num pulse-glow-gold" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-card">
+                        <span class="countdown-num pulse-glow-gold" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-card">
+                        <span class="countdown-num pulse-glow-gold" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Section -->
+    <section id="family" class="family-section scroll-trigger-section">
+        <div class="container">
+            <div class="section-title-wrapper" id="familyTitle">
+                <span class="subtitle">Best Wishes From</span>
+                <h2 class="section-title">Family & Friends</h2>
+                <div class="title-divider"></div>
+            </div>
+            
+            <div class="family-grid">
+                <!-- Bride's Family -->
+                <div class="family-column scroll-reveal-family">
+                    <h3 class="family-title">Bride's Family</h3>
+                    <div class="family-card">
+                        <div class="family-member">
+                            <span class="member-role">Parents / Hosts</span>
+                            <span class="member-name">Mrs & Mr Hyder</span>
+                            <span class="member-subtext">Kalara House, Kadaba Post & Kadaba Taluk</span>
+                        </div>
+                        <div class="family-member">
+                            <span class="member-role">Grandparents (Marhoom)</span>
+                            <span class="member-name">Late Adam & Late M. Moosan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Groom's Family -->
+                <div class="family-column scroll-reveal-family">
+                    <h3 class="family-title">Groom's Family</h3>
+                    <div class="family-card">
+                        <div class="family-member">
+                            <span class="member-role">Father</span>
+                            <span class="member-name">Mr. Adam</span>
+                            <span class="member-subtext">Arigamajal Darkas House, Puttur Taluk</span>
+                        </div>
+                        <div class="family-member">
+                            <span class="member-role">Warm Regards</span>
+                            <span class="member-name">Family & Well-Wishers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue & Location Section -->
+    <section id="venue" class="venue-section scroll-trigger-section">
+        <div class="container">
+            <div class="venue-grid" id="venueRevealGrid">
+                <!-- Location Info -->
+                <div class="venue-info-card">
+                    <div class="venue-arch-bg"></div>
+                    <div class="venue-content">
+                        <span class="subtitle">Join Us At</span>
+                        <h2 class="section-title">The Venue</h2>
+                        <div class="title-divider"></div>
+                        
+                        <h3 class="venue-name">Janapriya Garden, Mani</h3>
+                        <p class="venue-address">
+                            Mani, Bantwal Taluk, Dakshina Kannada,<br>
+                            Karnataka, India
+                        </p>
+                        
+                        <div class="venue-time-meta">
+                            <div class="meta-item">
+                                <strong>Date:</strong> Sunday, 27th September 2026 (Chand 16, Rabi ul Akhir)
+                            </div>
+                            <div class="meta-item">
+                                <strong>Nikah Time:</strong> 11:30 AM Sharp
+                            </div>
+                            <div class="meta-item">
+                                <strong>Lunch:</strong> Immediately Following Nikah
+                            </div>
+                        </div>
+
+                        <a href="https://maps.google.com/?q=Janapriya+Garden+Mani" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            <span>Open in Google Maps</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Map iframe -->
+                <div class="venue-map-card">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15560.123456789!2d75.1054!3d12.8542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba35e1234567890%3A0x1234567890abcdef!2sMani%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1692298918239!5m2!1sen!2sin" 
+                        class="google-map-iframe" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Google Map Location of Janapriya Garden, Mani">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wedding Dress Code Section -->
+    <section class="dresscode-section scroll-trigger-section">
+        <div class="container">
+            <div class="dresscode-card" id="dresscodeRevealCard">
+                <div class="dresscode-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2a3 3 0 0 0-3 3h6a3 3 0 0 0-3-3z"/>
+                        <path d="M12 5L2 14v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2L12 5z"/>
+                    </svg>
+                </div>
+                <h3 class="dresscode-title">Dress Code</h3>
+                <p class="dresscode-text">Traditional / Formal Attire</p>
+                <p class="dresscode-subtext">We kindly invite our guests to join us in elegant modest traditional attire, celebrating this joyful day.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dua & Closing Section -->
+    <footer class="closing-section scroll-trigger-section">
+        <div class="container">
+            <div class="closing-glow"></div>
+
+            <div class="closing-arch" id="closingRevealArch">
+                <div class="closing-content">
+                    <p class="closing-dua closing-animate-line">
+                        “Your presence and duas will make our special day even more beautiful and memorable.”
+                    </p>
+                    
+                    <div class="closing-names closing-animate-line">
+                        Best Wishes From,<br>
+                        <span class="names gold-shimmer-text">Family & Friends</span>
+                    </div>
+                    
+                    <div class="closing-couple-names closing-animate-line gold-shimmer-text">
+                        Ayishath Azmiya & Habeeb
+                    </div>
+
+                    <div class="closing-divider closing-animate-line">
+                        <svg viewBox="0 0 100 20" width="80" height="15" fill="currentColor">
+                            <path d="M50 0 L55 5 L50 10 L45 5 Z M50 10 L55 15 L50 20 L45 15 Z" stroke="currentColor" stroke-width="1" />
+                        </svg>
+                    </div>
+                    
+                    <p class="closing-arabic closing-animate-line pulse-glow-gold">
+                        جَزَاكُمُ اللَّهُ خَيْرًا
+                    </p>
+                    <p class="closing-thanks closing-animate-line">
+                        Jazakumullahu Khairan
+                    </p>
+                    <p class="closing-subthanks closing-animate-line">
+                        for celebrating this beautiful beginning with us.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ayishath Azmiya & Habeeb. Designed with love & blessings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
