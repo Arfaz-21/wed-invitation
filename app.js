@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initEnvelopeEntrance();
     initSacredGeometryCanvas();
     initScrollAnimationSystem();
-    initNasheedAudio();
     initCountdown();
 });
 
@@ -30,7 +29,6 @@ function initEnvelopeEntrance() {
         
         envelopeOverlay.classList.add('open');
         
-        // Trigger cinematic opening after door slide begins
         setTimeout(() => {
             initCinematicOpening();
         }, 500);
@@ -42,7 +40,6 @@ function initEnvelopeEntrance() {
 
     waxSeal.addEventListener('click', openEnvelope);
     
-    // Auto open if guest doesn't click after 4 seconds
     setTimeout(() => {
         if (!envelopeOverlay.classList.contains('open')) {
             openEnvelope();
@@ -85,11 +82,9 @@ function initSacredGeometryCanvas() {
             this.x = x || Math.random() * width;
             this.y = y || (isMouseSpark ? y : Math.random() * height);
             
-            // Depth layer (1 = background, 2 = midground, 3 = foreground)
             this.depth = Math.random() > 0.6 ? 3 : (Math.random() > 0.3 ? 2 : 1);
             this.size = Math.random() * (isMouseSpark ? 2.5 : (this.depth * 1.2)) + 0.6;
             
-            // Petal or Gold Dust
             this.isPetal = Math.random() > 0.55 && !isMouseSpark;
             
             this.speedY = isMouseSpark ? (Math.random() * 0.8 - 0.2) : (this.isPetal ? (Math.random() * 0.4 + 0.1) * this.depth * 0.5 : -(Math.random() * 0.25 + 0.05) * this.depth * 0.6);
@@ -111,7 +106,6 @@ function initSacredGeometryCanvas() {
         }
 
         update() {
-            // Add subtle parallax offset based on scrollY
             const parallaxFactor = this.depth * 0.15;
             this.y += this.speedY + (scrollY * 0.0002 * parallaxFactor);
             this.x += this.speedX + Math.sin(this.angle) * 0.2;
@@ -140,7 +134,6 @@ function initSacredGeometryCanvas() {
 
             ctx.beginPath();
             if (this.isPetal) {
-                // Draw soft oval rose petal
                 ctx.ellipse(0, 0, this.size * 1.8, this.size * 0.9, 0, 0, Math.PI * 2);
             } else {
                 ctx.arc(0, 0, this.size, 0, Math.PI * 2);
@@ -235,7 +228,7 @@ function initCinematicOpening() {
 }
 
 /* =========================================================================
-   4. Scroll Animation System (Golden Thread Progress Draw)
+   4. Scroll Animation System
    ========================================================================= */
 function initScrollAnimationSystem() {
     const navbar = document.getElementById('navbar');
@@ -322,7 +315,6 @@ function initScrollAnimationSystem() {
         );
     });
 
-    // Golden Thread Timeline Draw Animation
     gsap.fromTo("#timelineProgressLine", 
         { scaleY: 0 },
         { 
@@ -456,130 +448,4 @@ function initCountdown() {
 
     updateDisplay();
     setInterval(updateDisplay, 1000);
-}
-
-/* =========================================================================
-   6. Islamic Nasheed Player with Web Audio Fallback
-   ========================================================================= */
-function initNasheedAudio() {
-    const audioContainer = document.getElementById('audioContainer');
-    const audioToggle = document.getElementById('audioToggle');
-    const bgMusic = document.getElementById('bgMusic');
-
-    if (!audioToggle) return;
-
-    let isPlaying = false;
-    let fadeInterval = null;
-    let fallbackSynthActive = false;
-    let audioCtx = null, mainGain = null, delayNode = null, schedulerTimer = null;
-
-    const pentatonicScale = [155.56, 174.61, 196.00, 233.08, 261.63, 311.13, 349.23, 392.00];
-
-    function startFallbackSynth() {
-        fallbackSynthActive = true;
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        mainGain = audioCtx.createGain();
-        mainGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-        mainGain.connect(audioCtx.destination);
-
-        function playNote() {
-            if (!fallbackSynthActive) return;
-            const freq = pentatonicScale[Math.floor(Math.random() * pentatonicScale.length)];
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.0);
-            osc.connect(gain);
-            gain.connect(mainGain);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 3.2);
-            schedulerTimer = setTimeout(playNote, 1600 + Math.random() * 1200);
-        }
-        playNote();
-    }
-
-    function stopFallbackSynth() {
-        fallbackSynthActive = false;
-        clearTimeout(schedulerTimer);
-        if (audioCtx) {
-            audioCtx.close();
-            audioCtx = null;
-        }
-    }
-
-    function playNasheed() {
-        if (!bgMusic) {
-            startFallbackSynth();
-            audioContainer.classList.add('playing');
-            audioToggle.querySelector('.audio-text').textContent = 'Mute Nasheed';
-            isPlaying = true;
-            return;
-        }
-
-        clearInterval(fadeInterval);
-        bgMusic.volume = 0;
-
-        const playPromise = bgMusic.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                audioContainer.classList.add('playing');
-                audioToggle.querySelector('.audio-text').textContent = 'Mute Nasheed';
-                isPlaying = true;
-
-                let vol = 0;
-                fadeInterval = setInterval(() => {
-                    if (vol < 0.5) {
-                        vol += 0.05;
-                        bgMusic.volume = Math.min(vol, 0.5);
-                    } else {
-                        clearInterval(fadeInterval);
-                    }
-                }, 60);
-            }).catch(err => {
-                startFallbackSynth();
-                audioContainer.classList.add('playing');
-                audioToggle.querySelector('.audio-text').textContent = 'Mute Nasheed';
-                isPlaying = true;
-            });
-        }
-    }
-
-    function pauseNasheed() {
-        if (fallbackSynthActive) {
-            stopFallbackSynth();
-            audioContainer.classList.remove('playing');
-            audioToggle.querySelector('.audio-text').textContent = 'Play Nasheed';
-            isPlaying = false;
-            return;
-        }
-
-        if (!bgMusic) return;
-
-        clearInterval(fadeInterval);
-        let vol = bgMusic.volume;
-
-        fadeInterval = setInterval(() => {
-            if (vol > 0.05) {
-                vol -= 0.05;
-                bgMusic.volume = Math.max(vol, 0);
-            } else {
-                clearInterval(fadeInterval);
-                bgMusic.pause();
-                audioContainer.classList.remove('playing');
-                audioToggle.querySelector('.audio-text').textContent = 'Play Nasheed';
-                isPlaying = false;
-            }
-        }, 50);
-    }
-
-    audioToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            pauseNasheed();
-        } else {
-            playNasheed();
-        }
-    });
 }
