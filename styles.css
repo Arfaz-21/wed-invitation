@@ -430,7 +430,7 @@ a {
     width: 90%;
     max-width: var(--max-width);
     margin: 0 auto;
-    height: 90px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -438,7 +438,7 @@ a {
 }
 
 .navbar.scrolled .nav-container {
-    height: 75px;
+    height: 70px;
 }
 
 .nav-logo {
@@ -553,16 +553,26 @@ a {
     .nav-item { font-size: 0.85rem; color: var(--title-color); }
 }
 
+@media (max-width: 768px) {
+    .nav-container {
+        height: 65px;
+    }
+    .navbar.scrolled .nav-container {
+        height: 60px;
+    }
+}
+
 /* Hero Section */
 .hero-section {
     position: relative;
     width: 100%;
-    height: 100vh;
-    min-height: 800px;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
+    padding-top: 90px;
+    padding-bottom: 70px;
 }
 
 .particles-canvas {
@@ -595,7 +605,7 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px 0;
+    padding: 30px 0 40px;
 }
 
 .golden-glow {
@@ -611,7 +621,7 @@ a {
 }
 
 .bismillah-wrapper {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .bismillah-arabic {
@@ -739,7 +749,8 @@ a {
     font-size: 1.15rem;
     font-style: italic;
     color: var(--gold-light);
-    margin-top: 10px;
+    margin-top: 12px;
+    margin-bottom: 30px;
     letter-spacing: 0.08em;
 }
 
@@ -766,9 +777,32 @@ a {
 }
 
 @media (max-width: 768px) {
-    .bride-name, .groom-name { font-size: 2.8rem; }
-    .arch-frame-container { padding: 55px 25px 50px; }
-    .wedding-date-hero { padding: 10px 15px; gap: 10px; font-size: 0.75rem; }
+    .hero-section {
+        padding-top: 95px;
+        padding-bottom: 75px;
+        min-height: auto;
+    }
+    .hero-content {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    .bismillah-wrapper {
+        margin-bottom: 20px;
+    }
+    .bismillah-arabic {
+        font-size: 2.2rem;
+    }
+    .bismillah-english {
+        font-size: 0.9rem;
+    }
+    .blessings-tag {
+        font-size: 1.0rem;
+    }
+    .bride-name, .groom-name { font-size: 2.7rem; }
+    .arch-frame-container { padding: 50px 20px 45px; margin-bottom: 25px; }
+    .invitation-text { margin-bottom: 25px; }
+    .wedding-date-hero { padding: 10px 12px; gap: 8px; font-size: 0.72rem; flex-wrap: wrap; }
+    .hijri-date-sub { margin-top: 10px; margin-bottom: 25px; font-size: 1.05rem; }
 }
 
 /* Quran Verse Section */
